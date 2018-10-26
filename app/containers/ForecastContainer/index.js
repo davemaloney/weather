@@ -64,14 +64,12 @@ export class ForecastContainer extends React.Component {
     return (
       <div>
         <CitySelect
-          // unitsSelect={unitsSelect}
           cityInput={cityInput}
           onUserInputChange={this.handleUserInputChange}
           handleSubmit={this.handleSubmit}
         />
         <UnitsSelector
           unitsSelect={unitsSelect}
-          // cityInput={cityInput}
           handleToggle={this.handleToggle}
         />
         <Forecast {...this.props} />

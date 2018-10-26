@@ -16,7 +16,7 @@ export const initialState = fromJS({
   weather: false,
   data: {},
   city: 'New York',
-  units: 'metric',
+  units: 'imperial',
 });
 
 function forecastContainerReducer(state = initialState, action) {

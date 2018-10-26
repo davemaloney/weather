@@ -7,6 +7,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 // import styled from 'styled-components';
+import { Helmet } from 'react-helmet';
 
 import { FormattedMessage } from 'react-intl';
 import messages from './messages';
@@ -18,7 +19,13 @@ function Forecast(props) {
     <div>
       {props.weather ? (
         <div>
-          <h1>{props.data.city.name}</h1>
+          <Helmet>
+            <title>{props.data.city.name} Weather Forecast</title>
+          </Helmet>
+
+          <h1>
+            {props.data.city.name}, {props.data.city.country}
+          </h1>
           <ForecastCards forecasts={props.data.list} />
         </div>
       ) : (
