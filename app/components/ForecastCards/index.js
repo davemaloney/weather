@@ -18,6 +18,11 @@ function ForecastCards(props) {
       {Math.round(forecast.main.temp)}
       &deg;
       <br />
+      <img
+        alt={`${forecast.weather[0].main} icon`}
+        src={`http://openweathermap.org/img/w/${forecast.weather[0].icon}.png`}
+      />
+      <br />
       {forecast.weather[0].main}
       <br />
       <FormattedDate
