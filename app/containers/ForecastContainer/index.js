@@ -20,6 +20,7 @@ import { getWeather } from './actions';
 import Forecast from '../../components/Forecast';
 import CitySelect from '../../components/CitySelect';
 import UnitsSelector from '../../components/UnitsSelector';
+import Message from '../../components/Message';
 
 /* eslint-disable react/prefer-stateless-function */
 export class ForecastContainer extends React.Component {
@@ -63,7 +64,7 @@ export class ForecastContainer extends React.Component {
     const { cityInput, unitsSelect } = this.state;
     return (
       <div>
-        {this.props.message && <div>{this.props.message}</div>}
+        <Message message={this.props.message} />
         <CitySelect
           cityInput={cityInput}
           onUserInputChange={this.handleUserInputChange}
