@@ -63,6 +63,7 @@ export class ForecastContainer extends React.Component {
     const { cityInput, unitsSelect } = this.state;
     return (
       <div>
+        {this.props.message && <div>{this.props.message}</div>}
         <CitySelect
           cityInput={cityInput}
           onUserInputChange={this.handleUserInputChange}

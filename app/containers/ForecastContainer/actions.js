@@ -17,9 +17,10 @@ export function getWeather(city, units) {
     units,
   };
 }
-export function getWeatherFail() {
+export function getWeatherFail(message) {
   return {
     type: GET_WEATHER_FAIL,
+    message,
   };
 }
 export function getWeatherSuccess(data) {

@@ -22,8 +22,10 @@ function* getWeather(action) {
     // const data = MockData; // Mock Data to reduce api calls while developing
     if (data.cod === '200') {
       yield put(getWeatherSuccess(data));
+    } else if (parseInt(data.cod, 10) > 399 < 500) {
+      yield put(getWeatherFail(data.message));
     } else {
-      throw new Error('no data.cod');
+      throw new Error('Error');
     }
   } catch (e) {
     yield put(getWeatherFail(e.message));

@@ -17,6 +17,7 @@ export const initialState = fromJS({
   data: {},
   city: 'New York',
   units: 'imperial',
+  message: null,
 });
 
 function forecastContainerReducer(state = initialState, action) {
@@ -27,12 +28,13 @@ function forecastContainerReducer(state = initialState, action) {
         .set('city', action.city)
         .set('units', action.units);
     case GET_WEATHER_FAIL:
-      return state.set(('isWaiting', false));
+      return state.set('isWaiting', false).set('message', action.message);
     case GET_WEATHER_SUCCESS:
       return state
         .set('isWaiting', false)
         .set('weather', true)
-        .set('data', action.data);
+        .set('data', action.data)
+        .set('message', null);
     default:
       return state;
   }
