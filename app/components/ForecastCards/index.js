@@ -8,7 +8,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 // import styled from 'styled-components';
 
-// import { FormattedMessage } from 'react-intl';
+import { FormattedDate } from 'react-intl';
 // import messages from './messages';
 
 function ForecastCards(props) {
@@ -20,7 +20,12 @@ function ForecastCards(props) {
       <br />
       {forecast.weather[0].main}
       <br />
-      {forecast.dt_txt}
+      <FormattedDate
+        value={new Date(forecast.dt * 1000)}
+        weekday="long"
+        hour="numeric"
+        minute="numeric"
+      />
       <hr />
     </div>
   ));
