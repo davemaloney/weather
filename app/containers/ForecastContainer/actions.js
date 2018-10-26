@@ -10,10 +10,11 @@ import {
   GET_WEATHER_SUCCESS,
 } from './constants';
 
-export function getWeather(city) {
+export function getWeather(city, units) {
   return {
     type: GET_WEATHER,
     city,
+    units,
   };
 }
 export function getWeatherFail() {

@@ -6,9 +6,9 @@ import { GET_WEATHER } from './constants';
 
 const KEY = '940ef3e5862e0d114d2437d33f5ca036';
 
-function fetchDataFromApi(city) {
+function fetchDataFromApi(units, city) {
   return fetch(
-    `https://api.openweathermap.org/data/2.5/forecast?q=${city}&APPID=${KEY}`,
+    `https://api.openweathermap.org/data/2.5/forecast?q=${city}&APPID=${KEY}&units=${units}`,
   )
     .then(response => response.json())
     .catch(error => {
@@ -18,7 +18,7 @@ function fetchDataFromApi(city) {
 
 function* getWeather(action) {
   try {
-    const data = yield call(fetchDataFromApi, action.city);
+    const data = yield call(fetchDataFromApi, action.units, action.city);
     // const data = MockData; // Mock Data to reduce api calls while developing
     if (data.cod === '200') {
       yield put(getWeatherSuccess(data));

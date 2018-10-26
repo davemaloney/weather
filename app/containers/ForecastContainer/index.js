@@ -19,12 +19,16 @@ import { getWeather } from './actions';
 
 import Forecast from '../../components/Forecast';
 import CitySelect from '../../components/CitySelect';
+import UnitsSelector from '../../components/UnitsSelector';
 
 /* eslint-disable react/prefer-stateless-function */
 export class ForecastContainer extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { cityInput: this.props.city };
+    this.state = {
+      cityInput: this.props.city,
+      unitsSelect: this.props.units,
+    };
   }
 
   static propTypes = {
@@ -33,7 +37,7 @@ export class ForecastContainer extends React.Component {
   };
 
   componentDidMount() {
-    this.props.getWeather(this.props.city);
+    this.props.getWeather(this.props.city, this.props.units);
   }
 
   handleUserInputChange = event => {
@@ -43,18 +47,32 @@ export class ForecastContainer extends React.Component {
   };
 
   handleSubmit = event => {
-    this.props.getWeather(this.state.cityInput);
+    this.props.getWeather(this.state.cityInput, this.state.unitsSelect);
     event.preventDefault();
   };
 
+  handleToggle = event => {
+    const newUnit = event.target.value;
+    this.setState({
+      unitsSelect: newUnit,
+    });
+    this.props.getWeather(this.state.cityInput, newUnit);
+  };
+
   render() {
-    const { cityInput } = this.state;
+    const { cityInput, unitsSelect } = this.state;
     return (
       <div>
         <CitySelect
+          // unitsSelect={unitsSelect}
           cityInput={cityInput}
           onUserInputChange={this.handleUserInputChange}
           handleSubmit={this.handleSubmit}
+        />
+        <UnitsSelector
+          unitsSelect={unitsSelect}
+          // cityInput={cityInput}
+          handleToggle={this.handleToggle}
         />
         <Forecast {...this.props} />
       </div>
@@ -74,7 +92,7 @@ const mapStateToProps = makeSelectForecastContainer();
 
 function mapDispatchToProps(dispatch) {
   return {
-    getWeather: city => dispatch(getWeather(city)),
+    getWeather: (city, units) => dispatch(getWeather(city, units)),
   };
 }
 
