@@ -11,6 +11,7 @@ import { Helmet } from 'react-helmet';
 
 import { FormattedMessage } from 'react-intl';
 import messages from './messages';
+import countries from './countries';
 
 import ForecastCards from '../ForecastCards';
 
@@ -24,7 +25,7 @@ function Forecast(props) {
           </Helmet>
 
           <h1>
-            {props.data.city.name}, {props.data.city.country}
+            {props.data.city.name}, {countries[props.data.city.country]}
           </h1>
           <ForecastCards forecasts={props.data.list} />
         </div>
