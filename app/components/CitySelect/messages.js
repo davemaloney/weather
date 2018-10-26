@@ -11,6 +11,6 @@ export const scope = 'app.components.CitySelect';
 export default defineMessages({
   inputLabel: {
     id: `${scope}.inputLabel`,
-    defaultMessage: 'Place Name:',
+    defaultMessage: 'Place name:',
   },
 });

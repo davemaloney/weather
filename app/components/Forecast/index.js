@@ -11,11 +11,16 @@ import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 import messages from './messages';
 
+import ForecastCards from '../ForecastCards';
+
 function Forecast(props) {
   return (
     <div>
       {props.weather ? (
-        <h1>{props.data.city.name}</h1>
+        <div>
+          <h1>{props.data.city.name}</h1>
+          <ForecastCards forecasts={props.data.list} />
+        </div>
       ) : (
         <FormattedMessage {...messages.error} />
       )}
