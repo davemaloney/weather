@@ -4,11 +4,11 @@ import { getWeatherFail, getWeatherSuccess } from './actions';
 import { GET_WEATHER } from './constants';
 // import MockData from './mockdata';
 
-const KEY = '940ef3e5862e0d114d2437d33f5ca036';
+import APIACCESS from './APIACCESS';
 
 function fetchDataFromApi(units, city) {
   return fetch(
-    `https://api.openweathermap.org/data/2.5/forecast?q=${city}&APPID=${KEY}&units=${units}`,
+    `${APIACCESS.url}?q=${city}&APPID=${APIACCESS.key}&units=${units}`,
   )
     .then(response => response.json())
     .catch(error => {
