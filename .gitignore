@@ -4,6 +4,9 @@ build
 node_modules
 stats.json
 
+# API Keys and secrets files should stay out of git
+app/containers/ForecastContainer/APIACCESS.js
+
 # Cruft
 .DS_Store
 npm-debug.log
