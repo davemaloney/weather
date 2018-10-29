@@ -15,7 +15,7 @@ import injectReducer from 'utils/injectReducer';
 import makeSelectForecastContainer from './selectors';
 import reducer from './reducer';
 import saga from './saga';
-import { getWeather } from './actions';
+import { getByCoords, getWeather } from './actions';
 
 import Forecast from '../../components/Forecast';
 import CitySelect from '../../components/CitySelect';
@@ -27,18 +27,20 @@ export class ForecastContainer extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      location: this.props.location,
       cityInput: this.props.city,
       unitsSelect: this.props.units,
     };
   }
 
   static propTypes = {
+    getByCoords: PropTypes.func.isRequired,
     getWeather: PropTypes.func.isRequired,
     children: PropTypes.element,
   };
 
   componentDidMount() {
-    this.props.getWeather(this.props.city, this.props.units);
+    // this.props.getWeather(this.props.city, this.props.units);
   }
 
   handleUserInputChange = event => {
@@ -57,18 +59,50 @@ export class ForecastContainer extends React.Component {
     this.setState({
       unitsSelect: newUnit,
     });
-    this.props.getWeather(this.state.cityInput, newUnit);
+    if (this.props.location) {
+      this.props.getByCoords(this.props.location, newUnit);
+    } else {
+      this.props.getWeather(this.state.cityInput, newUnit);
+    }
+  };
+
+  getPosition = () =>
+    new Promise((resolve, reject) => {
+      navigator.geolocation.getCurrentPosition(resolve, reject);
+    });
+
+  handlePosition = () => {
+    const { units } = this.props;
+    this.getPosition()
+      .then(position => {
+        const newLocation = {
+          lat: position.coords.latitude,
+          lon: position.coords.longitude,
+        };
+        this.setState({
+          location: newLocation,
+        });
+        this.props.getByCoords(newLocation, units);
+      })
+      .catch(err => {
+        // TODO: This needs better error handling
+        console.error(err.message);
+      });
   };
 
   render() {
-    const { cityInput, unitsSelect } = this.state;
+    const { cityInput, unitsSelect, location } = this.state;
     return (
       <div>
         <Message message={this.props.message} />
         <CitySelect
           cityInput={cityInput}
+          unitsSelect={unitsSelect}
+          location={location}
           onUserInputChange={this.handleUserInputChange}
           handleSubmit={this.handleSubmit}
+          handlePosition={this.handlePosition}
+          getPosition={this.getPosition}
         />
         <UnitsSelector
           unitsSelect={unitsSelect}
@@ -92,6 +126,7 @@ const mapStateToProps = makeSelectForecastContainer();
 
 function mapDispatchToProps(dispatch) {
   return {
+    getByCoords: (location, units) => dispatch(getByCoords(location, units)),
     getWeather: (city, units) => dispatch(getWeather(city, units)),
   };
 }

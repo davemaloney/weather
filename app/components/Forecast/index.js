@@ -30,7 +30,7 @@ function Forecast(props) {
           <ForecastCards forecasts={props.data.list} />
         </div>
       ) : (
-        <FormattedMessage {...messages.error} />
+        <FormattedMessage {...messages.loading} />
       )}
     </div>
   );

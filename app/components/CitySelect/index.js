@@ -14,7 +14,12 @@ import messages from './messages';
 /* eslint-disable react/prefer-stateless-function */
 class CitySelect extends React.Component {
   render() {
-    const { cityInput, onUserInputChange, handleSubmit } = this.props;
+    const {
+      cityInput,
+      onUserInputChange,
+      handleSubmit,
+      handlePosition,
+    } = this.props;
     return (
       <div>
         <form onSubmit={handleSubmit}>
@@ -24,6 +29,9 @@ class CitySelect extends React.Component {
           </label>
           <input type="submit" value="Submit" />
         </form>
+        <button type="button" onClick={handlePosition}>
+          Current Location
+        </button>
       </div>
     );
   }

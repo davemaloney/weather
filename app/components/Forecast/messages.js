@@ -9,8 +9,8 @@ import { defineMessages } from 'react-intl';
 export const scope = 'app.components.Forecast';
 
 export default defineMessages({
-  error: {
+  loading: {
     id: `${scope}.header`,
-    defaultMessage: 'Error: Weather data could not be accessed.',
+    defaultMessage: 'Please select a location for the weather forecast.',
   },
 });
