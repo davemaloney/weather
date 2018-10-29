@@ -14,14 +14,15 @@ import HomePage from 'containers/HomePage/Loadable';
 import NotFoundPage from 'containers/NotFoundPage/Loadable';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { Container } from 'reactstrap';
 
 export default function App() {
   return (
-    <div>
+    <Container>
       <Switch>
         <Route exact path="/" component={HomePage} />
         <Route component={NotFoundPage} />
       </Switch>
-    </div>
+    </Container>
   );
 }

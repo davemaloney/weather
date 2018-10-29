@@ -6,7 +6,8 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-// import styled from 'styled-components';
+
+import { Label, Input } from 'reactstrap';
 
 // import { FormattedMessage } from 'react-intl';
 // import messages from './messages';
@@ -14,31 +15,35 @@ import PropTypes from 'prop-types';
 function UnitsSelector(props) {
   const { unitsSelect, handleToggle } = props;
   return (
-    <div>
-      <div className="radio">
-        <label>
-          <input
-            type="radio"
-            name="unitGroup"
-            value="imperial"
-            defaultChecked={unitsSelect === 'imperial'}
-            onClick={handleToggle}
-          />
-          &deg; F
-        </label>
-      </div>
-      <div className="radio">
-        <label>
-          <input
-            type="radio"
-            name="unitGroup"
-            value="metric"
-            defaultChecked={unitsSelect === 'metric'}
-            onClick={handleToggle}
-          />
-          &deg; C
-        </label>
-      </div>
+    <div className="btn-group btn-group-toggle">
+      <Label
+        className={`btn ${
+          unitsSelect === 'imperial' ? 'btn-dark' : 'btn-light'
+        }`}
+      >
+        <Input
+          type="radio"
+          name="unitGroup"
+          id="fahrenheit"
+          value="imperial"
+          defaultChecked={unitsSelect === 'imperial'}
+          onClick={handleToggle}
+        />
+        &deg; F
+      </Label>
+      <Label
+        className={`btn ${unitsSelect === 'metric' ? 'btn-dark' : 'btn-light'}`}
+      >
+        <Input
+          type="radio"
+          name="unitGroup"
+          id="celcius"
+          value="metric"
+          defaultChecked={unitsSelect === 'metric'}
+          onClick={handleToggle}
+        />
+        &deg; C
+      </Label>
     </div>
   );
 }
