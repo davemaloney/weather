@@ -4,30 +4,35 @@
 
 Built as a demonstration project, this weather forecast utility is based on and owes much to [React Boilerplate](https://github.com/react-boilerplate/react-boilerplate). The basic package has been modified to use CSS Modules and Less.
 
-Weather API information is sourced from [OpenWeatherMap](https://openweathermap.org/). Please [obtain an API key](https://openweathermap.org/appid) before beginning.
+## Prerequisites
+
+- Package management is done via [NPM](https://www.npmjs.com/). **Expect NPM at or above version 5 and Node at or above version 8.10.** (Built with NPM 6.5.4 and Node 11.0.0)
+- Weather API information is sourced from [OpenWeatherMap](https://openweathermap.org/). Please [obtain an API key](https://openweathermap.org/appid) before beginning.
 
 ## Development
 
-**Add API Key** to [app/containers/ForecastContainer/APIACCESS.js](app/containers/ForecastContainer/APIACCESS.js)
+React Boilerplate uses HMR and webpack to serve a local page and update the view as you develop.
 
-```js
-const APIACCESS = {
-  url: 'https://api.openweathermap.org/data/2.5/forecast',
-  key: 'YOUR_API_KEY',
-};
-```
-
-Install dependencies:
-
-```sh
-npm install
-```
-
-Run site at [http://localhost:3000/](http://localhost:3000/) with webpack dev server:
-
-```sh
-npm start
-```
+1. Clone repository and move into `/weather` directory:
+   ```sh
+   $ git clone https://github.com/davemaloney/weather.git
+   $ cd weather
+   ```
+1. **Important:** Add API Key to [app/containers/ForecastContainer/APIACCESS.js](app/containers/ForecastContainer/APIACCESS.js):
+   ```js
+   const APIACCESS = {
+     url: 'https://api.openweathermap.org/data/2.5/forecast',
+     key: 'YOUR_API_KEY',
+   };
+   ```
+1. Install dependencies:
+   ```sh
+   $ npm install
+   ```
+1. Run site at [http://localhost:3000/](http://localhost:3000/) with webpack dev server:
+   ```sh
+   $ npm start
+   ```
 
 <!-- Run tests & coverage report:
 
