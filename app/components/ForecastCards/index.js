@@ -26,7 +26,7 @@ function ForecastCards(props) {
       <div className={styles.forecast}>
         <img
           alt={`${forecast.weather[0].main} icon`}
-          src={`http://openweathermap.org/img/w/${
+          src={`https://openweathermap.org/img/w/${
             forecast.weather[0].icon
           }.png`}
           className={styles.weatherIcon}
