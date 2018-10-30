@@ -9,6 +9,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 // import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
+import { Container } from 'reactstrap';
 
 import injectSaga from 'utils/injectSaga';
 import injectReducer from 'utils/injectReducer';
@@ -94,20 +95,22 @@ export class ForecastContainer extends React.Component {
     const { cityInput, unitsSelect, location } = this.state;
     return (
       <div>
-        <Message message={this.props.message} />
-        <CitySelect
-          cityInput={cityInput}
-          unitsSelect={unitsSelect}
-          location={location}
-          onUserInputChange={this.handleUserInputChange}
-          handleSubmit={this.handleSubmit}
-          handlePosition={this.handlePosition}
-          getPosition={this.getPosition}
-        />
-        <UnitsSelector
-          unitsSelect={unitsSelect}
-          handleToggle={this.handleToggle}
-        />
+        <Container>
+          <Message message={this.props.message} />
+          <CitySelect
+            cityInput={cityInput}
+            unitsSelect={unitsSelect}
+            location={location}
+            onUserInputChange={this.handleUserInputChange}
+            handleSubmit={this.handleSubmit}
+            handlePosition={this.handlePosition}
+            getPosition={this.getPosition}
+          />
+          <UnitsSelector
+            unitsSelect={unitsSelect}
+            handleToggle={this.handleToggle}
+          />
+        </Container>
         <Forecast {...this.props} />
       </div>
     );

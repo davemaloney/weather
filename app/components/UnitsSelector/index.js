@@ -17,14 +17,13 @@ function UnitsSelector(props) {
   return (
     <div className="btn-group btn-group-toggle">
       <Label
-        className={`btn ${
+        className={`btn btn-lg ${
           unitsSelect === 'imperial' ? 'btn-dark' : 'btn-light'
         }`}
       >
         <Input
           type="radio"
           name="unitGroup"
-          id="fahrenheit"
           value="imperial"
           defaultChecked={unitsSelect === 'imperial'}
           onClick={handleToggle}
@@ -32,12 +31,13 @@ function UnitsSelector(props) {
         &deg; F
       </Label>
       <Label
-        className={`btn ${unitsSelect === 'metric' ? 'btn-dark' : 'btn-light'}`}
+        className={`btn btn-lg ${
+          unitsSelect === 'metric' ? 'btn-dark' : 'btn-light'
+        }`}
       >
         <Input
           type="radio"
           name="unitGroup"
-          id="celcius"
           value="metric"
           defaultChecked={unitsSelect === 'metric'}
           onClick={handleToggle}

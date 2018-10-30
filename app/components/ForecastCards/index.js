@@ -19,24 +19,28 @@ function ForecastCards(props) {
       className={`${forecast.weather[0].icon}-icon ${styles.forecastCard}`}
       key={forecast.dt}
     >
-      {Math.round(forecast.main.temp)}
-      &deg;
-      <br />
-      <img
-        alt={`${forecast.weather[0].main} icon`}
-        src={`http://openweathermap.org/img/w/${forecast.weather[0].icon}.png`}
-      />
-      <br />
-      {forecast.weather[0].main}
-      <br />
+      <div className={styles.temperature}>
+        {Math.round(forecast.main.temp)}
+        &deg;
+      </div>
+      <div className={styles.forecast}>
+        <img
+          alt={`${forecast.weather[0].main} icon`}
+          src={`http://openweathermap.org/img/w/${
+            forecast.weather[0].icon
+          }.png`}
+          className={styles.weatherIcon}
+        />
+        {forecast.weather[0].main}
+      </div>
       <FormattedDate
+        className={styles.date}
         value={new Date(forecast.dt * 1000)}
         weekday="short"
         hour="numeric"
         timeZoneName="short"
         // minute="numeric"
       />
-      <hr />
     </div>
   ));
   return (

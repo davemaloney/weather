@@ -22,39 +22,37 @@ class CitySelect extends React.Component {
       handlePosition,
     } = this.props;
     return (
-      <div>
-        <Form inline onSubmit={handleSubmit}>
-          <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
-            <Label className="mr-sm-2" size="lg" for="cityInput">
-              <FormattedMessage {...messages.inputLabel} />{' '}
-            </Label>
-            <Input
-              placeholder="e.g. New York"
-              type="text"
-              bsSize="lg"
-              id="cityInput"
-              name="cityInput"
-              value={cityInput}
-              onChange={onUserInputChange}
-            />
-          </FormGroup>
+      <Form inline onSubmit={handleSubmit}>
+        <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
+          <Label className="mr-sm-2" size="lg" for="cityInput">
+            <FormattedMessage {...messages.inputLabel} />{' '}
+          </Label>
           <Input
-            className="btn btn-lg btn-primary mr-sm-2"
-            size="lg"
-            type="submit"
-            value="Submit"
+            placeholder="e.g. New York"
+            type="text"
+            bsSize="lg"
+            id="cityInput"
+            name="cityInput"
+            value={cityInput}
+            onChange={onUserInputChange}
           />
-          <Button
-            outline
-            color="primary"
-            size="lg"
-            type="button"
-            onClick={handlePosition}
-          >
-            Current Location
-          </Button>
-        </Form>
-      </div>
+        </FormGroup>
+        <Input
+          className="btn btn-lg btn-primary mr-sm-2"
+          bsSize="lg"
+          type="submit"
+          value="Submit"
+        />
+        <Button
+          outline
+          color="primary"
+          size="lg"
+          type="button"
+          onClick={handlePosition}
+        >
+          Current Location
+        </Button>
+      </Form>
     );
   }
 }

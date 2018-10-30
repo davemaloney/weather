@@ -11,6 +11,7 @@ export const scope = 'app.components.Forecast';
 export default defineMessages({
   loading: {
     id: `${scope}.header`,
-    defaultMessage: 'Please select a location for the weather forecast.',
+    defaultMessage:
+      'Please select a location for the weather forecast. Search by name or US zip code.',
   },
 });
