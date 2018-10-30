@@ -7,8 +7,16 @@ import { GET_BY_COORDS, GET_WEATHER } from './constants';
 import APIACCESS from './APIACCESS';
 
 function fetchDataByCity(units, city) {
+  // assume that city is a string of letters
+  let queryType = 'q';
+  // but if 'city' has a number in it, treat it like a zip code
+  if (city.match(/\d/g)) {
+    queryType = 'zip';
+  }
   return fetch(
-    `${APIACCESS.url}?q=${city}&APPID=${APIACCESS.key}&units=${units}`,
+    `${APIACCESS.url}?${queryType}=${city}&APPID=${
+      APIACCESS.key
+    }&units=${units}`,
   )
     .then(response => response.json())
     .catch(error => {
@@ -31,7 +39,6 @@ function fetchDataByCoords(coords, units) {
 function* getByCoords(action) {
   try {
     const data = yield call(fetchDataByCoords, action.location, action.units);
-    // const data = MockData; // Mock Data to reduce api calls while developing
     if (data.cod === '200') {
       yield put(getWeatherSuccess(data));
     } else if (parseInt(data.cod, 10) > 399 < 500) {
