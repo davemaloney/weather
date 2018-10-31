@@ -4,6 +4,8 @@
 
 Built as a demonstration project, this weather forecast utility is based on and owes much to [React Boilerplate](https://github.com/react-boilerplate/react-boilerplate). The basic package has been modified to use CSS Modules and Less.
 
+This build focuses much more on functionality and creating a great base to work off of, at the expense of design. This is probably an okay trade-off as this is not a complete project and would be integrated into a larger framework, design scheme, branding, and requirements, but it's a great place to start. Hope you like it!
+
 ## Prerequisites
 
 - Package management is done via [NPM](https://www.npmjs.com/). **Expect NPM at or above version 5 and Node at or above version 8.10.** (Built with NPM 6.5.4 and Node 11.0.0)
