@@ -1,35 +1,39 @@
+@breakpoint: ~'(min-width: 700px)';
+@night: ~'#131862';
+@day: ~'#7ec0ee';
+
 .forecastList {
-  display: grid;
-  grid-template-columns: repeat(8, 1fr);
-  row-gap: 1em;
-  font-size: 1vw;
+  font-size: 1em;
+  @media @breakpoint {
+    font-size: 1vw;
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    row-gap: 1em;
+  }
 }
 .forecastCard {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  padding: 0.5em 0;
+  background: @day;
 
   &[class*='n-icon'] {
-    background: #1e5799;
+    background: @night;
     color: white;
   }
-  &[class*='n-icon'] + *[class*='d-icon'] {
-    background: linear-gradient(
-      to right,
-      rgba(30, 87, 153, 1) 0%,
-      rgba(125, 185, 232, 0.33) 14%,
-      rgba(125, 185, 232, 0) 21%
-    );
+  &[class*='n-icon'] + *[class*='d-icon']:not(*:nth-child(8n + 1)) {
+    background: linear-gradient(to bottom, @night 0%, @day 30%);
+    @media @breakpoint {
+      background: linear-gradient(to right, @night 0%, @day 30%);
+    }
   }
-  &[class*='d-icon'] + *[class*='n-icon'] {
-    background: linear-gradient(
-      to right,
-      rgba(125, 185, 232, 0) 0%,
-      rgba(125, 185, 232, 0.38) 9%,
-      rgba(30, 87, 153, 0.75) 18%,
-      rgba(30, 87, 153, 1) 24%
-    );
+  &[class*='d-icon'] + *[class*='n-icon']:not(*:nth-child(8n + 1)) {
+    background: linear-gradient(to bottom, @day 0%, @night 30%);
+    @media @breakpoint {
+      background: linear-gradient(to right, @day 0%, @night 30%);
+    }
   }
 }
 .weatherIcon {
@@ -37,14 +41,34 @@
 }
 .temperature {
   font-size: 2em;
-  border: 1px solid;
-  border-radius: 50%;
   margin: 0.5em;
-  padding: 0.33em;
+  position: relative;
+
+  &:before {
+    height: 2.3em;
+    width: 2.3em;
+    display: block;
+    border: 1px solid;
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    content: '';
+    background: none transparent;
+  }
 }
 .forecast {
   font-size: 1.5em;
 }
 .date {
   font-size: 0.75em;
+}
+
+@media (min-width: 700px) {
+  .forecastList {
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    row-gap: 1em;
+  }
 }

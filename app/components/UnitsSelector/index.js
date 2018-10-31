@@ -11,11 +11,12 @@ import { Label, Input } from 'reactstrap';
 
 // import { FormattedMessage } from 'react-intl';
 // import messages from './messages';
+import styles from './styles.less';
 
 function UnitsSelector(props) {
   const { unitsSelect, handleToggle } = props;
   return (
-    <div className="btn-group btn-group-toggle">
+    <div className={`${styles.unitsSelector} btn-group btn-group-toggle`}>
       <Label
         className={`btn btn-lg ${
           unitsSelect === 'imperial' ? 'btn-dark' : 'btn-light'

@@ -24,10 +24,11 @@ class CitySelect extends React.Component {
     return (
       <Form inline onSubmit={handleSubmit}>
         <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
-          <Label className="mr-sm-2" size="lg" for="cityInput">
+          <Label className="mb-2 mb-sm-0 mr-sm-2" size="lg" for="cityInput">
             <FormattedMessage {...messages.inputLabel} />{' '}
           </Label>
           <Input
+            className="form-control"
             placeholder="e.g. New York"
             type="text"
             bsSize="lg"
@@ -38,12 +39,13 @@ class CitySelect extends React.Component {
           />
         </FormGroup>
         <Input
-          className="btn btn-lg btn-primary mr-sm-2"
+          className="btn btn-lg btn-primary mb-2 mb-sm-0 mr-sm-2"
           bsSize="lg"
           type="submit"
           value="Submit"
         />
         <Button
+          className="mb-2 mb-sm-0"
           outline
           color="primary"
           size="lg"

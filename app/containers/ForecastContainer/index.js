@@ -17,6 +17,7 @@ import makeSelectForecastContainer from './selectors';
 import reducer from './reducer';
 import saga from './saga';
 import { getByCoords, getWeather } from './actions';
+import styles from './styles.less';
 
 import Forecast from '../../components/Forecast';
 import CitySelect from '../../components/CitySelect';
@@ -97,19 +98,21 @@ export class ForecastContainer extends React.Component {
       <div>
         <Container>
           <Message message={this.props.message} />
-          <CitySelect
-            cityInput={cityInput}
-            unitsSelect={unitsSelect}
-            location={location}
-            onUserInputChange={this.handleUserInputChange}
-            handleSubmit={this.handleSubmit}
-            handlePosition={this.handlePosition}
-            getPosition={this.getPosition}
-          />
-          <UnitsSelector
-            unitsSelect={unitsSelect}
-            handleToggle={this.handleToggle}
-          />
+          <div className={styles.forecastHeader}>
+            <CitySelect
+              cityInput={cityInput}
+              unitsSelect={unitsSelect}
+              location={location}
+              onUserInputChange={this.handleUserInputChange}
+              handleSubmit={this.handleSubmit}
+              handlePosition={this.handlePosition}
+              getPosition={this.getPosition}
+            />
+            <UnitsSelector
+              unitsSelect={unitsSelect}
+              handleToggle={this.handleToggle}
+            />
+          </div>
         </Container>
         <Forecast {...this.props} />
       </div>
