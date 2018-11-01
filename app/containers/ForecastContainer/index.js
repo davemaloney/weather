@@ -23,6 +23,7 @@ import Forecast from '../../components/Forecast';
 import CitySelect from '../../components/CitySelect';
 import UnitsSelector from '../../components/UnitsSelector';
 import Message from '../../components/Message';
+import Chart from '../../components/Chart';
 
 /* eslint-disable react/prefer-stateless-function */
 export class ForecastContainer extends React.Component {
@@ -114,6 +115,7 @@ export class ForecastContainer extends React.Component {
             />
           </div>
         </Container>
+        <Chart {...this.props} />
         <Forecast {...this.props} />
       </div>
     );
