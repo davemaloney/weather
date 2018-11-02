@@ -14,6 +14,7 @@ import styles from './styles.less';
 /* eslint-disable react/prefer-stateless-function */
 class Chart extends React.Component {
   static propTypes = {
+    timezoneOffset: PropTypes.number.isRequired,
     weather: PropTypes.bool.isRequired,
     data: PropTypes.shape({
       city: PropTypes.object,
@@ -62,7 +63,7 @@ class Chart extends React.Component {
     const data = [];
     this.props.data.list.forEach(forecast => {
       const i = {};
-      i.date = new Date(forecast.dt * 1000);
+      i.date = new Date((forecast.dt + this.props.timezoneOffset) * 1000);
       i.temp = forecast.main.temp;
       data.push(i);
     });
@@ -86,7 +87,7 @@ class Chart extends React.Component {
       .append('g')
       .attr('class', 'axis')
       .attr('transform', `translate(0,${height})`)
-      .call(d3.axisBottom(x)) // .tickFormat(d3.timeFormat('%a %H %p')))
+      .call(d3.axisBottom(x).tickFormat(d3.timeFormat('%a %H %p')))
       .selectAll('text')
       .style('text-anchor', 'end')
       .attr('dx', '-.8em')

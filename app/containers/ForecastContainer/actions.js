@@ -9,6 +9,7 @@ import {
   GET_WEATHER,
   GET_WEATHER_FAIL,
   GET_WEATHER_SUCCESS,
+  GET_TIMEZONE_SUCCESS,
 } from './constants';
 
 export function getByCoords(location, units) {
@@ -35,5 +36,11 @@ export function getWeatherSuccess(data) {
   return {
     type: GET_WEATHER_SUCCESS,
     data,
+  };
+}
+export function getTimezoneSuccess(timezone) {
+  return {
+    type: GET_TIMEZONE_SUCCESS,
+    timezone,
   };
 }

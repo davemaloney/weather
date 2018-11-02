@@ -1,10 +1,42 @@
-import { call, put, takeLatest } from 'redux-saga/effects';
+import { call, put, takeLatest, all } from 'redux-saga/effects';
 
-import { getWeatherFail, getWeatherSuccess } from './actions';
+import {
+  getWeatherFail,
+  getWeatherSuccess,
+  getTimezoneSuccess,
+} from './actions';
 import { GET_BY_COORDS, GET_WEATHER } from './constants';
 // import MockData from './mockdata';
 
 import APIACCESS from './APIACCESS';
+
+function fetchTimezone(position, time) {
+  return fetch(
+    `${APIACCESS.googleTimezone.url}?location=${position.lat},${
+      position.lon
+    }&timestamp=${time}
+&key=${APIACCESS.googleTimezone.key}`,
+  )
+    .then(response => response.json())
+    .catch(error => {
+      throw Error(error);
+    });
+}
+
+function* getTimezone(position, time) {
+  try {
+    const timezone = yield call(fetchTimezone, position, time);
+    if (timezone.timeZoneId) {
+      yield put(getTimezoneSuccess(timezone));
+    } else if (new Date().getTimezoneOffset()) {
+      throw new Error('Error');
+    } else {
+      throw new Error('Error');
+    }
+  } catch (e) {
+    yield put(getWeatherFail(e.message));
+  }
+}
 
 function fetchDataByCity(units, city) {
   // assume that city is a string of letters
@@ -14,8 +46,8 @@ function fetchDataByCity(units, city) {
     queryType = 'zip';
   }
   return fetch(
-    `${APIACCESS.url}?${queryType}=${city}&APPID=${
-      APIACCESS.key
+    `${APIACCESS.weather.url}?${queryType}=${city}&APPID=${
+      APIACCESS.weather.key
     }&units=${units}`,
   )
     .then(response => response.json())
@@ -26,8 +58,8 @@ function fetchDataByCity(units, city) {
 
 function fetchDataByCoords(coords, units) {
   return fetch(
-    `${APIACCESS.url}?lat=${coords.lat}&lon=${coords.lon}&APPID=${
-      APIACCESS.key
+    `${APIACCESS.weather.url}?lat=${coords.lat}&lon=${coords.lon}&APPID=${
+      APIACCESS.weather.key
     }&units=${units}`,
   )
     .then(response => response.json())
@@ -56,7 +88,10 @@ function* getWeather(action) {
     const data = yield call(fetchDataByCity, action.units, action.city);
     // const data = MockData; // Mock Data to reduce api calls while developing
     if (data.cod === '200') {
-      yield put(getWeatherSuccess(data));
+      yield all([
+        put(getWeatherSuccess(data)),
+        call(getTimezone, data.city.coord, data.list[0].dt),
+      ]);
     } else if (parseInt(data.cod, 10) > 399 < 500) {
       yield put(getWeatherFail(data.message));
     } else {

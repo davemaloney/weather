@@ -38,6 +38,8 @@ export class ForecastContainer extends React.Component {
     getByCoords: PropTypes.func.isRequired,
     getWeather: PropTypes.func.isRequired,
     weather: PropTypes.bool.isRequired,
+    timezone: PropTypes.string.isRequired,
+    timezoneOffset: PropTypes.number.isRequired,
     location: PropTypes.shape({
       lat: PropTypes.number,
       lon: PropTypes.number,
@@ -119,8 +121,16 @@ export class ForecastContainer extends React.Component {
             />
           </div>
         </Container>
-        <Chart weather={this.props.weather} data={this.props.data} />
-        <Forecast weather={this.props.weather} data={this.props.data} />
+        <Chart
+          timezoneOffset={this.props.timezoneOffset}
+          weather={this.props.weather}
+          data={this.props.data}
+        />
+        <Forecast
+          timezone={this.props.timezone}
+          weather={this.props.weather}
+          data={this.props.data}
+        />
       </div>
     );
   }
