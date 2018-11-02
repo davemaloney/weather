@@ -6,11 +6,8 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-
 import { Label, Input } from 'reactstrap';
 
-// import { FormattedMessage } from 'react-intl';
-// import messages from './messages';
 import styles from './styles.less';
 
 function UnitsSelector(props) {

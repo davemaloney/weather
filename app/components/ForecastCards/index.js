@@ -10,8 +10,6 @@ import { FormattedDate } from 'react-intl';
 
 import styles from './styles.less';
 
-// import messages from './messages';
-
 function ForecastCards(props) {
   const { forecasts } = props;
   const listItems = forecasts.map(forecast => (

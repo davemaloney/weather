@@ -13,4 +13,16 @@ export default defineMessages({
     id: `${scope}.inputLabel`,
     defaultMessage: 'Place name:',
   },
+  inputPlaceholder: {
+    id: `${scope}.inputPlaceholder`,
+    defaultMessage: 'e.g. New York',
+  },
+  submitLabel: {
+    id: `${scope}.submitLabel`,
+    defaultMessage: 'Submit',
+  },
+  currentLocation: {
+    id: `${scope}.currentLocation`,
+    defaultMessage: 'Current Location',
+  },
 });

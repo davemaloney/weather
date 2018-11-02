@@ -10,14 +10,19 @@ import * as d3 from 'd3';
 import { Container } from 'reactstrap';
 
 import styles from './styles.less';
-// import { FormattedMessage } from 'react-intl';
-// import messages from './messages';
 
 /* eslint-disable react/prefer-stateless-function */
 class Chart extends React.Component {
+  static propTypes = {
+    weather: PropTypes.bool.isRequired,
+    data: PropTypes.shape({
+      city: PropTypes.object,
+      list: PropTypes.array,
+    }),
+  };
+
   componentDidUpdate() {
     if (this.props.weather) {
-      // document.getElementById('chart').innerHTML = '';
       this.drawChart();
     }
   }
@@ -53,8 +58,7 @@ class Chart extends React.Component {
       .append('g')
       .attr('transform', `translate(${margin.left},${margin.top})`);
 
-    // Get the data
-    // format the data
+    // pass in and format the data
     const data = [];
     this.props.data.list.forEach(forecast => {
       const i = {};
@@ -82,7 +86,7 @@ class Chart extends React.Component {
       .append('g')
       .attr('class', 'axis')
       .attr('transform', `translate(0,${height})`)
-      .call(d3.axisBottom(x).tickFormat(d3.timeFormat('%a %H %p')))
+      .call(d3.axisBottom(x)) // .tickFormat(d3.timeFormat('%a %H %p')))
       .selectAll('text')
       .style('text-anchor', 'end')
       .attr('dx', '-.8em')
@@ -104,11 +108,5 @@ class Chart extends React.Component {
     );
   }
 }
-
-Chart.propTypes = {
-  weather: PropTypes.bool.isRequired,
-  // city: PropTypes.string,
-  data: PropTypes.object,
-};
 
 export default Chart;

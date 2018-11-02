@@ -7,9 +7,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Helmet } from 'react-helmet';
-
 import { FormattedMessage } from 'react-intl';
 import { Container } from 'reactstrap';
+
 import styles from './styles.less';
 import messages from './messages';
 import countries from './countries';
