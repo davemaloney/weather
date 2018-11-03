@@ -5,7 +5,7 @@ node_modules
 stats.json
 
 # API Keys and secrets files should stay out of git
-# server/APIACCESS.js
+server/APIACCESS.js
 
 # Cruft
 .DS_Store
