@@ -28,7 +28,6 @@ module.exports = app => {
       `${url}?location=${lat},${lon}&timestamp=${time}&key=${key}`,
       (error, response, body) => {
         if (!error && response.statusCode === 200) {
-          console.log(body); // Print the google web page.
           res.send(body);
         }
       },

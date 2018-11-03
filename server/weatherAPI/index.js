@@ -28,7 +28,6 @@ module.exports = app => {
       `${url}?${queryType}=${city}&APPID=${key}&units=${units}`,
       (error, response, body) => {
         if (!error && response.statusCode === 200) {
-          console.log(body); // Print the google web page.
           res.send(body);
         }
       },
@@ -40,7 +39,6 @@ module.exports = app => {
       `${url}?lat=${lat}&lon=${lon}&APPID=${key}&units=${units}`,
       (error, response, body) => {
         if (!error && response.statusCode === 200) {
-          console.log(body); // Print the google web page.
           res.send(body);
         }
       },
