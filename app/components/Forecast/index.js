@@ -7,9 +7,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Helmet } from 'react-helmet';
-
 import { FormattedMessage } from 'react-intl';
 import { Container } from 'reactstrap';
+
 import styles from './styles.less';
 import messages from './messages';
 import countries from './countries';
@@ -29,7 +29,10 @@ function Forecast(props) {
             <h1>
               {props.data.city.name}, {countries[props.data.city.country]}
             </h1>
-            <ForecastCards forecasts={props.data.list} />
+            <ForecastCards
+              timezone={props.timezone}
+              forecasts={props.data.list}
+            />
           </div>
         ) : (
           <div className="text-center">
@@ -44,6 +47,7 @@ function Forecast(props) {
 Forecast.propTypes = {
   weather: PropTypes.bool.isRequired,
   data: PropTypes.object.isRequired,
+  timezone: PropTypes.string.isRequired,
 };
 
 export default Forecast;

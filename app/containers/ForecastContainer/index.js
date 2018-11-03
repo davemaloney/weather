@@ -7,12 +7,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-// import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
 import { Container } from 'reactstrap';
-
 import injectSaga from 'utils/injectSaga';
 import injectReducer from 'utils/injectReducer';
+
 import makeSelectForecastContainer from './selectors';
 import reducer from './reducer';
 import saga from './saga';
@@ -23,13 +22,13 @@ import Forecast from '../../components/Forecast';
 import CitySelect from '../../components/CitySelect';
 import UnitsSelector from '../../components/UnitsSelector';
 import Message from '../../components/Message';
+import Chart from '../../components/Chart';
 
 /* eslint-disable react/prefer-stateless-function */
 export class ForecastContainer extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      location: this.props.location,
       cityInput: this.props.city,
       unitsSelect: this.props.units,
     };
@@ -38,7 +37,21 @@ export class ForecastContainer extends React.Component {
   static propTypes = {
     getByCoords: PropTypes.func.isRequired,
     getWeather: PropTypes.func.isRequired,
-    children: PropTypes.element,
+    weather: PropTypes.bool.isRequired,
+    timezone: PropTypes.string.isRequired,
+    timezoneOffset: PropTypes.number.isRequired,
+    location: PropTypes.shape({
+      lat: PropTypes.number,
+      lon: PropTypes.number,
+    }),
+    city: PropTypes.string,
+    units: PropTypes.string,
+    message: PropTypes.string,
+    data: PropTypes.shape({
+      city: PropTypes.object,
+      cod: PropTypes.string,
+      list: PropTypes.array,
+    }),
   };
 
   componentDidMount() {
@@ -81,9 +94,6 @@ export class ForecastContainer extends React.Component {
           lat: position.coords.latitude,
           lon: position.coords.longitude,
         };
-        this.setState({
-          location: newLocation,
-        });
         this.props.getByCoords(newLocation, units);
       })
       .catch(err => {
@@ -93,7 +103,7 @@ export class ForecastContainer extends React.Component {
   };
 
   render() {
-    const { cityInput, unitsSelect, location } = this.state;
+    const { cityInput, unitsSelect } = this.state;
     return (
       <div>
         <Container>
@@ -101,12 +111,9 @@ export class ForecastContainer extends React.Component {
           <div className={styles.forecastHeader}>
             <CitySelect
               cityInput={cityInput}
-              unitsSelect={unitsSelect}
-              location={location}
               onUserInputChange={this.handleUserInputChange}
               handleSubmit={this.handleSubmit}
               handlePosition={this.handlePosition}
-              getPosition={this.getPosition}
             />
             <UnitsSelector
               unitsSelect={unitsSelect}
@@ -114,19 +121,20 @@ export class ForecastContainer extends React.Component {
             />
           </div>
         </Container>
-        <Forecast {...this.props} />
+        <Chart
+          timezoneOffset={this.props.timezoneOffset}
+          weather={this.props.weather}
+          data={this.props.data}
+        />
+        <Forecast
+          timezone={this.props.timezone}
+          weather={this.props.weather}
+          data={this.props.data}
+        />
       </div>
     );
   }
 }
-
-// ForecastContainer.propTypes = {
-//   dispatch: PropTypes.func.isRequired,
-// };
-
-// const mapStateToProps = createStructuredSelector({
-//   forecastContainer: makeSelectForecastContainer(),
-// });
 
 const mapStateToProps = makeSelectForecastContainer();
 

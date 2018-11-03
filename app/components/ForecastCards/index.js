@@ -10,10 +10,8 @@ import { FormattedDate } from 'react-intl';
 
 import styles from './styles.less';
 
-// import messages from './messages';
-
 function ForecastCards(props) {
-  const { forecasts } = props;
+  const { forecasts, timezone } = props;
   const listItems = forecasts.map(forecast => (
     <div
       className={`${forecast.weather[0].icon}-icon ${styles.forecastCard}`}
@@ -39,6 +37,7 @@ function ForecastCards(props) {
         weekday="short"
         hour="numeric"
         timeZoneName="short"
+        timeZone={timezone}
         // minute="numeric"
       />
     </div>
@@ -50,6 +49,7 @@ function ForecastCards(props) {
 
 ForecastCards.propTypes = {
   forecasts: PropTypes.array.isRequired,
+  timezone: PropTypes.string.isRequired,
 };
 
 export default ForecastCards;

@@ -10,6 +10,7 @@ import {
   GET_WEATHER,
   GET_WEATHER_FAIL,
   GET_WEATHER_SUCCESS,
+  GET_TIMEZONE,
 } from './constants';
 
 export const initialState = fromJS({
@@ -17,6 +18,8 @@ export const initialState = fromJS({
   weather: false,
   data: {},
   location: null,
+  timezone: 'America/New_York',
+  timezoneOffset: -18000,
   city: '',
   units: 'imperial',
   message: null,
@@ -47,6 +50,13 @@ function forecastContainerReducer(state = initialState, action) {
         .set('city', action.data.city.name)
         .set('cityInput', action.data.city.name)
         .set('location', action.data.city.coord);
+    case GET_TIMEZONE:
+      return state
+        .set('timezone', action.timezone.timeZoneId)
+        .set(
+          'timezoneOffset',
+          action.timezone.rawOffset + action.timezone.dstOffset,
+        );
     default:
       return state;
   }
