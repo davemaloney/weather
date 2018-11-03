@@ -2,14 +2,13 @@
 
 ## About
 
-Built as a demonstration project, this weather forecast utility is based on and owes much to [React Boilerplate](https://github.com/react-boilerplate/react-boilerplate). The basic package has been modified to use CSS Modules and Less.
-
-This build focuses much more on functionality and creating a great base to work off of, at the expense of design. This is probably an okay trade-off as this is not a complete project and would be integrated into a larger framework, design scheme, branding, and requirements, but it's a great place to start. Hope you like it!
+Built as a demonstration project, this weather forecast utility is based on [React Boilerplate](https://github.com/react-boilerplate/react-boilerplate). The basic package has been modified to use CSS Modules and Less.
 
 ## Prerequisites
 
 - Package management is done via [NPM](https://www.npmjs.com/). **Expect NPM at or above version 5 and Node at or above version 8.10.** (Built with NPM 6.5.4 and Node 11.0.0)
 - Weather API information is sourced from [OpenWeatherMap](https://openweathermap.org/). Please [obtain an API key](https://openweathermap.org/appid) before beginning.
+- Timezone information is sourced from [Google Timezone API](https://developers.google.com/maps/documentation/timezone/start), for which [you'll also need a key](https://cloud.google.com/maps-platform/?apis=places).
 
 ## Development
 
@@ -20,11 +19,17 @@ React Boilerplate uses HMR and webpack to serve a local page and update the view
    $ git clone https://github.com/davemaloney/weather.git
    $ cd weather
    ```
-1. **Important:** Add API Key to [app/containers/ForecastContainer/APIACCESS.js](app/containers/ForecastContainer/APIACCESS.js):
+1. **Important:** Add API Keys to [server/APIACCESS.js](server/APIACCESS.js):
    ```js
    const APIACCESS = {
-     url: 'https://api.openweathermap.org/data/2.5/forecast',
-     key: 'YOUR_API_KEY',
+     weather: {
+       url: 'https://api.openweathermap.org/data/2.5/forecast',
+       key: 'YOUR_API_KEY',
+     },
+     googleTimezone: {
+       url: 'https://maps.googleapis.com/maps/api/timezone/json',
+       key: 'YOUR_API_KEY',
+     },
    };
    ```
 1. Install dependencies:
@@ -58,13 +63,14 @@ npm run test-watch
 - Design focuses on temperature, general description, and time. Given that we've got the data, it would be great to create an options menu to allow user to select or hide humidity, pressure, and wind. Would be great to get some insight into what the users want. Maybe this is for a kite-flying club and wind direction is the most important metric.
 - Sourcing weather icons from OpenWeatherMap, but they are very bland. Would be great to get some nicer ones.
 - Should use cloud cover data in some way.
-- Timezone is always given in the user's local time; ideally this would be the time at the location of the forecast. Day/night indicators together with the timezone display help a bit with this, but it's still a bit confusing.
+- ~~Timezone is always given in the user's local time; ideally this would be the time at the location of the forecast. Day/night indicators together with the timezone display help a bit with this, but it's still a bit confusing.~~
 - Need to give a user a list of locations to choose from when ambiguous text is entered ("Fairfield"), rather than choosing for them.
 - Think of other ways to take user input? Maybe select a place on a map (easy use case for `getByCoords`).
 - OpenWeatherMap documentation implies that international postal codes might work when given the country code, but have not been able to reproduce this successfully.
 - Analytics?
 - Testing and validation needs improvement.
 - Remove cruft from React Boilerplate.
+- ~~Move API requests server-side~~
 
 ## Documentation
 

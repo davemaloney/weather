@@ -6,17 +6,9 @@ import {
   getTimezoneSuccess,
 } from './actions';
 import { GET_BY_COORDS, GET_WEATHER } from './constants';
-// import MockData from './mockdata';
-
-import APIACCESS from './APIACCESS';
 
 function fetchTimezone(position, time) {
-  return fetch(
-    `${APIACCESS.googleTimezone.url}?location=${position.lat},${
-      position.lon
-    }&timestamp=${time}
-&key=${APIACCESS.googleTimezone.key}`,
-  )
+  return fetch(`/geoAPI/${position.lat}/${position.lon}/${time}`)
     .then(response => response.json())
     .catch(error => {
       throw Error(error);
@@ -45,11 +37,7 @@ function fetchDataByCity(units, city) {
   if (city.match(/\d/g)) {
     queryType = 'zip';
   }
-  return fetch(
-    `${APIACCESS.weather.url}?${queryType}=${city}&APPID=${
-      APIACCESS.weather.key
-    }&units=${units}`,
-  )
+  return fetch(`/weather/${queryType}/${city}/${units}`)
     .then(response => response.json())
     .catch(error => {
       throw Error(error);
@@ -57,11 +45,7 @@ function fetchDataByCity(units, city) {
 }
 
 function fetchDataByCoords(coords, units) {
-  return fetch(
-    `${APIACCESS.weather.url}?lat=${coords.lat}&lon=${coords.lon}&APPID=${
-      APIACCESS.weather.key
-    }&units=${units}`,
-  )
+  return fetch(`/weather/pos/${coords.lat}/${coords.lon}/${units}`)
     .then(response => response.json())
     .catch(error => {
       throw Error(error);
