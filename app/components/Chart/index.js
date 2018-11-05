@@ -63,7 +63,10 @@ class Chart extends React.Component {
     const data = [];
     this.props.data.list.forEach(forecast => {
       const i = {};
-      i.date = new Date((forecast.dt + this.props.timezoneOffset) * 1000);
+      const GMTdiff = this.props.timezoneOffset;
+      const localDiff = -(new Date().getTimezoneOffset() * 60);
+      const resultTime = new Date((forecast.dt + GMTdiff - localDiff) * 1000);
+      i.date = resultTime;
       i.temp = forecast.main.temp;
       data.push(i);
     });
@@ -87,7 +90,12 @@ class Chart extends React.Component {
       .append('g')
       .attr('class', 'axis')
       .attr('transform', `translate(0,${height})`)
-      .call(d3.axisBottom(x).tickFormat(d3.timeFormat('%a %H %p')))
+      .call(
+        d3
+          .axisBottom(x)
+          .tickFormat(d3.timeFormat('%a %H %p'))
+          .ticks(40),
+      )
       .selectAll('text')
       .style('text-anchor', 'end')
       .attr('dx', '-.8em')
