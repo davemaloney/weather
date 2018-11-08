@@ -27,9 +27,6 @@ module.exports = app => {
     request(
       `${url}?${queryType}=${city}&APPID=${key}&units=${units}`,
       (error, response, body) => {
-        console.log('error:', error);
-        console.log('statusCode:', response && response.statusCode);
-        console.log('body:', body);
         res.send(body);
       },
     );
@@ -39,9 +36,7 @@ module.exports = app => {
     request(
       `${url}?lat=${lat}&lon=${lon}&APPID=${key}&units=${units}`,
       (error, response, body) => {
-        if (!error && response.statusCode === 200) {
-          res.send(body);
-        }
+        res.send(body);
       },
     );
   });

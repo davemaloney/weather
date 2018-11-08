@@ -3,6 +3,42 @@
 }
 .line {
   fill: none;
-  stroke: steelblue;
+  stroke: url(#hotToCold);
+  stroke-width: 8px;
+}
+.sunLine {
+  fill: none;
+  stroke: gold;
   stroke-width: 2px;
+  stroke-dasharray: 5000;
+  stroke-dashoffset: 5000;
+  animation: dash 5s linear forwards;
+}
+@keyframes dash {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+.mask {
+  fill: white;
+}
+.day {
+  fill: skyblue;
+  stop-color: skyblue;
+}
+.night {
+  fill: navy;
+  stop-color: navy;
+}
+.hot {
+  stop-color: red;
+}
+.cold {
+  stop-color: deepskyblue;
+}
+.hotToCold {
+  fill: url(#hotToCold);
+}
+.daynightGradient {
+  fill: url(#daynightGradient);
 }
